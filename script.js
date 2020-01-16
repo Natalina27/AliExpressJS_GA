@@ -6,9 +6,10 @@ document.addEventListener('DOMContentLoaded', () => {
    const goodsWrapper = document.querySelector('.goods-wrapper');
 
 
-   const createCardGoods = () => {
+   const createCardGoods = (id, title, price, img) => {
        const card = document.createElement('div');
        console.log(card);
+
 
    }
 });

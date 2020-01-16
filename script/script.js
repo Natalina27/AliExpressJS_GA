@@ -13,10 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
    }
 });
-//document.addEventListener('DOMContentLoaded', () => {
-//
-//     const search = document.querySelector('.search');
-//     //console.log('search: ', search);
+
+
+console.log('search: ', search);
 //     const cartBtn = document.getElementById('cart');
 //     //можно кажется так const cartBtn = document.querySelector(#cart);
 //     const wishlistBtn = document.getElementById('wishlist');

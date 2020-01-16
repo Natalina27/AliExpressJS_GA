@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
    const search = document.querySelector('.search');
+    console.log('search: ', search);
+
    const cartBtn = document.getElementById('cart');
    const wishlistBtn = document.getElementById('wishlist');
 
@@ -15,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-console.log('search: ', search);
+
 //     const cartBtn = document.getElementById('cart');
 //     //можно кажется так const cartBtn = document.querySelector(#cart);
 //     const wishlistBtn = document.getElementById('wishlist');

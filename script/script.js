@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const search = document.querySelector('.search');
      console.log('search: ', search);
+     console.dir('search');
 
     const cartBtn = document.getElementById('cart');
     const wishlistBtn = document.getElementById('wishlist');

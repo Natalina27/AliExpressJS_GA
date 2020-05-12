@@ -33,8 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
     goodsWrapper.append(createCardGoods(2, 'Фламинго', 20, './img/temp/Flamingo.jpg'));
     goodsWrapper.append(createCardGoods(3, 'Носки', 3.33, './img/temp/Socks.jpg'));
 
-    const closeCart = (event) => {
-        const target = event.target; // где был клик?
+    const closeCart = (e) => {
+        const target = e.target; // где был клик?
 
         if (target === cart || target.classList.contains('cart-close')) {
             cart.style.display = '';
@@ -48,4 +48,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     cartBtn.addEventListener('click', openCart);
     cart.addEventListener('click', closeCart);
+
 });

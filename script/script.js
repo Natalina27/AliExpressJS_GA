@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const openCart = (e) => {
-        e.preventDefault(); //
+        e.preventDefault(); //запрет на переход по ссылке (запрет действий браузера по умолчанию)
         cart.style.display = 'flex';
     };
 

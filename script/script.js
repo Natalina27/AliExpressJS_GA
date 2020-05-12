@@ -42,7 +42,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     };
 
-    const openCart = () => {
+    const openCart = (e) => {
+        e.preventDefault(); //
         cart.style.display = 'flex';
     };
 

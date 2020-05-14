@@ -36,11 +36,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeCart = (e) => {
         const target = e.target; // где был клик?
 
-        if (target === cart || target.classList.contains('cart-close')) {
+        if (target === cart || target.classList.contains('cart-close') || e.key === "Escape") {
             cart.style.display = '';
         }
 
+        console.log(e.key);
     };
+
+
+
 
     const openCart = (e) => {
         e.preventDefault(); //запрет на переход по ссылке (запрет действий браузера по умолчанию)
@@ -49,5 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     cartBtn.addEventListener('click', openCart);
     cart.addEventListener('click', closeCart);
+    document.addEventListener('keydown', closeCart);
 
 });

@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (target === cart || target.classList.contains('cart-close') || e.key === "Escape") {
             cart.style.display = '';
+            document.removeEventListener('keyup', closeCart);
         }
 
         console.log(e.key);
@@ -49,10 +50,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const openCart = (e) => {
         e.preventDefault(); //запрет на переход по ссылке (запрет действий браузера по умолчанию)
         cart.style.display = 'flex';
+        document.addEventListener('keyup', closeCart);
     };
 
     cartBtn.addEventListener('click', openCart);
     cart.addEventListener('click', closeCart);
-    document.addEventListener('keydown', closeCart);
+
 
 });

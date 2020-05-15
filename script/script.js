@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             </div>
                             <div class="card-body justify-content-between">
                                 <a href="#" class="card-title">${title}</a>
-                                <div class="card-price">${price} € </div>
+                                <div class="card-price">${+(price/70).toFixed(2)} € </div>
                                 <div>
                                     <button class="card-add-cart"
                                     data-goods-id="${id}">Добавить в корзину</button>
@@ -29,9 +29,15 @@ document.addEventListener('DOMContentLoaded', () => {
         return card;
     };
 
-    goodsWrapper.append(createCardGoods(1, 'Дартс', 20, './img/temp/Archer.jpg'));
-    goodsWrapper.append(createCardGoods(2, 'Фламинго', 20, './img/temp/Flamingo.jpg'));
-    goodsWrapper.append(createCardGoods(3, 'Носки', 3.33, './img/temp/Socks.jpg'));
+    const renderCard =(items) =>{
+        items.forEach(({price, id, title, imgMin}) =>{
+            goodsWrapper.append(createCardGoods(id, title, price, imgMin));
+        })
+    };
+
+    goodsWrapper.append(createCardGoods(1, 'Дартс', 200, './img/temp/Archer.jpg'));
+    goodsWrapper.append(createCardGoods(2, 'Фламинго', 2000, './img/temp/Flamingo.jpg'));
+    goodsWrapper.append(createCardGoods(3, 'Носки', 333, './img/temp/Socks.jpg'));
 
     const closeCart = (e) => {
         const target = e.target; // где был клик?
@@ -44,17 +50,22 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(e.key);
     };
 
-
-
-
     const openCart = (e) => {
         e.preventDefault(); //запрет на переход по ссылке (запрет действий браузера по умолчанию)
         cart.style.display = 'flex';
         document.addEventListener('keyup', closeCart);
     };
 
+    const getGoods = (handler) =>  {
+        fetch('./db/db.json')
+            .then(response => response.json())
+            .then(handler);
+    };
+
     cartBtn.addEventListener('click', openCart);
     cart.addEventListener('click', closeCart);
+
+    getGoods(renderCard);
 
 
 });

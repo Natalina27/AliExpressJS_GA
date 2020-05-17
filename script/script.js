@@ -54,16 +54,21 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('keyup', closeCart);
     };
 
-    const getGoods = (handler) =>  {
+    const getGoods = (handler, filter) =>  {
         fetch('./db/db.json')
             .then(response => response.json())
+            .then(filter)
             .then(handler);
+    };
+
+    const randomSort = (items) => {
+        return items.sort(() =>Math.random() - 0.5);
     };
 
     cartBtn.addEventListener('click', openCart);
     cart.addEventListener('click', closeCart);
 
-    getGoods(renderCard);
+    getGoods(renderCard, randomSort);
 
 
 });

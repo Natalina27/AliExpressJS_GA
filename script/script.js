@@ -30,14 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const renderCard =(items) =>{
+        goodsWrapper.textContent = '';
         items.forEach(({price, id, title, imgMin}) =>{
             goodsWrapper.append(createCardGoods(id, title, price, imgMin));
         })
     };
 
-    goodsWrapper.append(createCardGoods(1, 'Дартс', 200, './img/temp/Archer.jpg'));
-    goodsWrapper.append(createCardGoods(2, 'Фламинго', 2000, './img/temp/Flamingo.jpg'));
-    goodsWrapper.append(createCardGoods(3, 'Носки', 333, './img/temp/Socks.jpg'));
 
     const closeCart = (e) => {
         const target = e.target; // где был клик?

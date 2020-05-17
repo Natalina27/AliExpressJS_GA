@@ -29,9 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return card;
     };
 
-    const renderCard =(items) =>{
+    const renderCard =(goods) =>{
         goodsWrapper.textContent = '';
-        items.forEach(({price, id, title, imgMin}) =>{
+        goods.forEach(({price, id, title, imgMin}) =>{
             goodsWrapper.append(createCardGoods(id, title, price, imgMin));
         })
     };

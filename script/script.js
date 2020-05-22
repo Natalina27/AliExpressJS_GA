@@ -61,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(handler);
     };
 
+    //рандомная сортировка
     const randomSort = (items) => {
         return items.sort(() =>Math.random() - 0.5);
     };

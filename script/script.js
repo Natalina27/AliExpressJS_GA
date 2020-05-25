@@ -3,7 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartBtn = document.getElementById('cart');
     const wishlistBtn = document.getElementById('wishlist');
     const goodsWrapper = document.querySelector('.goods-wrapper');
-    let cart = document.querySelector('.cart');
+    const cart = document.querySelector('.cart');
+    const category = document.querySelector('.category');
 
     const createCardGoods = (id, title, price, img) => {
         const card = document.createElement('div');
@@ -66,8 +67,25 @@ document.addEventListener('DOMContentLoaded', () => {
         return items.sort(() =>Math.random() - 0.5);
     };
 
+    //выбор категории
+    const chooseCategory = e => {
+        e.preventDefault();
+        const target = e.target;
+
+        if(target.classList.contains('category-item')){
+            getGoods(renderCard, goods => {
+                const newGoods = goods.filter(item => {
+                    return item.category.includes;
+                });
+                return newGoods;
+                })
+            }
+        };
+
+
     cartBtn.addEventListener('click', openCart);
     cart.addEventListener('click', closeCart);
+    category.addEventListener('click', chooseCategory);
 
     getGoods(renderCard, randomSort);
 

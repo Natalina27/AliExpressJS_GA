@@ -34,7 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
         goodsWrapper.textContent = '';
         goods.forEach(({price, id, title, imgMin}) =>{
             goodsWrapper.append(createCardGoods(id, title, price, imgMin));
-        })
+        });
+        goodsWrapper.textContent = '';
     };
 
 

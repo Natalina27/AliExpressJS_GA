@@ -6,6 +6,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const cart = document.querySelector('.cart');
     const categoryPrnt = document.querySelector('.category');
 
+    const loading = () => {
+        goodsWrapper.innerHTML =
+            `<div id="spinner">
+                <div class="spinner-loading">
+                <div><div><div></div>
+                </div><div><div></div>
+                </div><div><div></div>
+                </div><div><div></div>
+                </div></div></div></div>`
+            };
+
     const createCardGoods = (id, title, price, img) => {
         const card = document.createElement('div');
         //console.log(card);
@@ -18,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             </div>
                             <div class="card-body justify-content-between">
                                 <a href="#" class="card-title">${title}</a>
-                                <div class="card-price">${+(price/70).toFixed(2)} € </div>
+                                <div class="card-price">${+(price / 70).toFixed(2)} € </div>
                                 <div>
                                     <button class="card-add-cart"
                                     data-goods-id="${id}">Добавить в корзину</button>
@@ -30,9 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
         return card;
     };
 
-    const renderCard =(goods) =>{
+    const renderCard = (goods) => {
         goodsWrapper.textContent = '';
-        goods.forEach(({price, id, title, imgMin}) =>{
+        goods.forEach(({price, id, title, imgMin}) => {
             goodsWrapper.append(createCardGoods(id, title, price, imgMin));
         });
         //goodsWrapper.textContent = '';
@@ -56,7 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('keyup', closeCart);
     };
 
-    const getGoods = (handler, filter) =>  {
+    const getGoods = (handler, filter) => {
+        loading();
         fetch('./db/db.json')
             .then(response => response.json())
             .then(filter)
@@ -65,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //рандомная сортировка
     const randomSort = (items) => {
-        return items.sort(() =>Math.random() - 0.5);
+        return items.sort(() => Math.random() - 0.5);
     };
 
     //выбор категории
@@ -76,10 +88,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const target = e.target;
         const category = target.dataset.category;
 
-        if(target.classList.contains('category-item')){
-            getGoods(renderCard, goods => goods.filter( item => item.category.includes(category)));
-            }
-        };
+        if (target.classList.contains('category-item')) {
+            getGoods(renderCard, goods => goods.filter(item => item.category.includes(category)));
+        }
+    };
 
 
     cartBtn.addEventListener('click', openCart);

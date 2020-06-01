@@ -97,6 +97,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cartBtn.addEventListener('click', openCart);
     cart.addEventListener('click', closeCart);
     categoryPrnt.addEventListener('click', chooseCategory);
+    search.addEventListener('submit', searchGoods);
 
     getGoods(renderCard, randomSort);
 

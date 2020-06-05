@@ -76,13 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     //рандомная сортировка
-    const randomSort = (items) => {
-        return items.sort(() => Math.random() - 0.5);
-    };
+    const randomSort = (items) => {return items.sort(() => Math.random() - 0.5)};
 
     //выбор категории
-
-
     const chooseCategory = e => {
         e.preventDefault();
         const target = e.target;
@@ -93,6 +89,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    //поиск товаров
+    const searchGoods = e =>{
+        e.preventDefault();
+        console.log(e.target.elements);
+
+    }
 
     cartBtn.addEventListener('click', openCart);
     cart.addEventListener('click', closeCart);

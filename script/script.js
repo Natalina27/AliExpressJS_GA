@@ -92,7 +92,9 @@ document.addEventListener('DOMContentLoaded', () => {
     //поиск товаров
     const searchGoods = e =>{
         e.preventDefault();
-        console.log(e.target.elements);
+        const input = e.target.elements.searchGoods;
+        console.log(input.value);
+
 
     }
 

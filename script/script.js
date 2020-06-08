@@ -93,7 +93,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchGoods = e =>{
         e.preventDefault();
         const input = e.target.elements.searchGoods;
-        console.log(input.value);
+        const inputValue = input.value.trim();
+
+        if(inputValue !== ''){
+            console.log(inputValue);
+        }
 
 
     }

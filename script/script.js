@@ -96,10 +96,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const inputValue = input.value.trim();
 
         if(inputValue !== ''){
-            console.log(inputValue);
+            const searchStr = new RegExp(inputValue, 'i');
+            getGoods(renderCard, goods => goods.filter(item => searchStr.test(item.title)));
         }
-
-
     }
 
     cartBtn.addEventListener('click', openCart);

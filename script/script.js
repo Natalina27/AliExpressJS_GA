@@ -43,10 +43,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const renderCard = (goods) => {
         goodsWrapper.textContent = '';
-        goods.forEach(({price, id, title, imgMin}) => {
-            goodsWrapper.append(createCardGoods(id, title, price, imgMin));
-        });
-        //goodsWrapper.textContent = '';
+        if (goods.length){
+            goods.forEach(({price, id, title, imgMin}) => {
+                goodsWrapper.append(createCardGoods(id, title, price, imgMin));
+            });
+        }else{
+            goodsWrapper.textContent = ' ❌ Sorry the goods are not found ....';
+        }
     };
 
 
@@ -99,6 +102,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const searchStr = new RegExp(inputValue, 'i');
             getGoods(renderCard, goods => goods.filter(item => searchStr.test(item.title)));
         }
+
+        input.value = '';
     }
 
     cartBtn.addEventListener('click', openCart);

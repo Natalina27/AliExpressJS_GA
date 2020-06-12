@@ -101,6 +101,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if(inputValue !== ''){
             const searchStr = new RegExp(inputValue, 'i');
             getGoods(renderCard, goods => goods.filter(item => searchStr.test(item.title)));
+        } else {
+            search.classList.add('error');
+            setTimeout(() => {
+                search.classList.remove('error');
+            }, 2000)
         }
 
         input.value = '';

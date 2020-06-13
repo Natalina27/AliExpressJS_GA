@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const goodsWrapper = document.querySelector('.goods-wrapper');
     const cart = document.querySelector('.cart');
     const categoryPrnt = document.querySelector('.category');
+    const wishlist = [];
 
     const loading = () => {
         goodsWrapper.innerHTML =
@@ -111,10 +112,31 @@ document.addEventListener('DOMContentLoaded', () => {
         input.value = '';
     }
 
+    //wish list
+    const toggleWishList = id => {
+        if(wishlist.indexOf(id) + 1){
+            wishlist.splice(wishlist.indexOf(id), 1);
+        }else{
+            wishlist.push(id);
+        }
+
+        console.log(wishlist);
+    }
+
+    const handlerGoods = e => {
+        const target = e.target;
+
+        if (target.classList.contains('card-add-wishlist')){
+            toggleWishList(target.dataset.goodsId);
+
+        }
+    }
+
     cartBtn.addEventListener('click', openCart);
     cart.addEventListener('click', closeCart);
     categoryPrnt.addEventListener('click', chooseCategory);
     search.addEventListener('submit', searchGoods);
+    goodsWrapper.addEventListener('click', handlerGoods);
 
     getGoods(renderCard, randomSort);
 

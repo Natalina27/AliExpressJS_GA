@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div><div><div></div>
                 </div><div><div></div>
                 </div></div></div></div>`
-            };
+    };
 
     const createCardGoods = (id, title, price, img) => {
         const card = document.createElement('div');
@@ -44,11 +44,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const renderCard = (goods) => {
         goodsWrapper.textContent = '';
-        if (goods.length){
+        if (goods.length) {
             goods.forEach(({price, id, title, imgMin}) => {
                 goodsWrapper.append(createCardGoods(id, title, price, imgMin));
             });
-        }else{
+        } else {
             goodsWrapper.textContent = ' ❌ Sorry the goods are not found ....';
         }
     };
@@ -80,7 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     //рандомная сортировка
-    const randomSort = (items) => {return items.sort(() => Math.random() - 0.5)};
+    const randomSort = (items) => {
+        return items.sort(() => Math.random() - 0.5)
+    };
 
     //выбор категории
     const chooseCategory = e => {
@@ -94,12 +96,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     //поиск товаров
-    const searchGoods = e =>{
+    const searchGoods = e => {
         e.preventDefault();
         const input = e.target.elements.searchGoods;
         const inputValue = input.value.trim();
 
-        if(inputValue !== ''){
+        if (inputValue !== '') {
             const searchStr = new RegExp(inputValue, 'i');
             getGoods(renderCard, goods => goods.filter(item => searchStr.test(item.title)));
         } else {
@@ -113,11 +115,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     //wish list
-    const toggleWishList = id => {
-        if(wishlist.indexOf(id) + 1){
+    const toggleWishList = (id, e) => {
+        if (wishlist.indexOf(id) + 1) {
             wishlist.splice(wishlist.indexOf(id), 1);
-        }else{
+            e.classList.remove('active');
+        } else {
             wishlist.push(id);
+            e.classList.add('active');
         }
 
         console.log(wishlist);
@@ -126,8 +130,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const handlerGoods = e => {
         const target = e.target;
 
-        if (target.classList.contains('card-add-wishlist')){
-            toggleWishList(target.dataset.goodsId);
+        if (target.classList.contains('card-add-wishlist')) {
+            toggleWishList(target.dataset.goodsId, target);
 
         }
     }

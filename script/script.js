@@ -5,6 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const goodsWrapper = document.querySelector('.goods-wrapper');
     const cart = document.querySelector('.cart');
     const categoryPrnt = document.querySelector('.category');
+    const cardCounter = cartBtn.querySelector('.counter') ;
+    let wishlistCounter = wishlistBtn.querySelector('.counter');
+    console.log('cardCounter', cardCounter);
+    console.log('wishlistCounter', wishlistCounter);
+
+
     const wishlist = [];
 
     const loading = () => {
@@ -25,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         card.innerHTML = `<div class="card">
                             <div class="card-img-wrapper">
                                 <img class="card-img-top" src="${img}" alt="">
-                                <button class="card-add-wishlist"
+                                <button class="card-add-wishlist ${wishlist.includes(id)? 'active' : ''}"
                                 data-goods-id="${id}"></button>
                             </div>
                             <div class="card-body justify-content-between">
@@ -115,8 +121,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     //wish list
+    const checkCount = () => {
+        wishlistCounter = wishlist.length;
+    };
+    const storageQuery = () => {
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    };
+
     const toggleWishList = (id, e) => {
-        if (wishlist.indexOf(id) + 1) {
+        if (wishlist.includes(id)) {
             wishlist.splice(wishlist.indexOf(id), 1);
             e.classList.remove('active');
         } else {
@@ -124,6 +137,8 @@ document.addEventListener('DOMContentLoaded', () => {
             e.classList.add('active');
         }
 
+        checkCount();
+        storageQuery();
         console.log(wishlist);
     }
 

@@ -5,8 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const goodsWrapper = document.querySelector('.goods-wrapper');
     const cart = document.querySelector('.cart');
     const categoryPrnt = document.querySelector('.category');
-    const cardCounter = cartBtn.querySelector('.counter') ;
-    let wishlistCounter = wishlistBtn.querySelector('.counter');
+    const cardCounter = cartBtn.querySelector('.counter');
+    const wishlistCounter = wishlistBtn.querySelector('.counter');
     console.log('cardCounter', cardCounter);
     console.log('wishlistCounter', wishlistCounter);
 
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         card.innerHTML = `<div class="card">
                             <div class="card-img-wrapper">
                                 <img class="card-img-top" src="${img}" alt="">
-                                <button class="card-add-wishlist ${wishlist.includes(id)? 'active' : ''}"
+                                <button class="card-add-wishlist ${wishlist.includes(id) ? 'active' : ''}"
                                 data-goods-id="${id}"></button>
                             </div>
                             <div class="card-body justify-content-between">
@@ -122,10 +122,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //wish list
     const checkCount = () => {
-        wishlistCounter = wishlist.length;
+        wishlistCounter.textContent = wishlist.length.toString();
+        console.log(typeof wishlistCounter.textContent);
+        console.log(typeof wishlist.length);
+
     };
-    const storageQuery = () => {
+
+    const storageQuery = (get) => {
+        if (get) {
+            if (localStorage.getItem('wishlist')) {
+                JSON.parse(localStorage.getItem('wishlist')).forEach(id => wishlist.push(id));
+            }
+        } else {
             localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        }
+        checkCount();
     };
 
     const toggleWishList = (id, e) => {
@@ -151,14 +162,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    const showWishlist = () => {
+
+    }
+
     cartBtn.addEventListener('click', openCart);
     cart.addEventListener('click', closeCart);
     categoryPrnt.addEventListener('click', chooseCategory);
     search.addEventListener('submit', searchGoods);
     goodsWrapper.addEventListener('click', handlerGoods);
+    wishlistBtn.addEventListener('click', showWishlist);
+
 
     getGoods(renderCard, randomSort);
-
-
+    storageQuery(true);
 });
 

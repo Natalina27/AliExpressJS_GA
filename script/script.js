@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const showWishlist = () => {
-
+        getGoods(renderCard, goods => goods.filter(item => wishlist.includes(item.id)))
     }
 
     cartBtn.addEventListener('click', openCart);

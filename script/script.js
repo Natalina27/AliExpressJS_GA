@@ -7,9 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const categoryPrnt = document.querySelector('.category');
     const cardCounter = cartBtn.querySelector('.counter');
     const wishlistCounter = wishlistBtn.querySelector('.counter');
-    console.log('cardCounter', cardCounter);
-    console.log('wishlistCounter', wishlistCounter);
-
+    const cartWrapper = document.querySelector('.cart-wrapper');
 
     const wishlist = [];
 
@@ -58,6 +56,57 @@ document.addEventListener('DOMContentLoaded', () => {
             goodsWrapper.textContent = ' ❌ Sorry the goods are not found ....';
         }
     };
+
+
+
+
+
+
+
+
+
+
+    //render товаров в корзине
+    const createCartGoods = (id, title, price, img) => {
+        const card = document.createElement('div');
+        //console.log(card);
+        card.className = 'goods';
+        card.innerHTML = `<div class="goods-img-wrapper">
+						<img class="goods-img" src="${img}" alt="">
+					</div>
+					<div class="goods-description">
+						<h2 class="goods-title">"${title}"</h2>
+						<p class="goods-price">"${price}"</p>
+					</div>
+					<div class="goods-price-count">
+						<div class="goods-trigger">
+							<button class="goods-add-wishlist ${wishlist.includes(id) ? 'active' : ''}" 
+							data-goods-id="${id}"></button>
+							<button class="goods-delete" data-goods-id="${id}"></button>
+						</div>
+						<div class="goods-count">1</div>
+					</div>`;
+
+        //console.log(card);
+        return card;
+    };
+    const renderCart = (goods) => {
+        cartWrapper.innerHTML = '';
+        if (goods.length) {
+            goods.forEach(({price, id, title, imgMin}) => {
+                cartWrapper.append(createCartGoods(id, title, price, imgMin));
+            });
+        } else {
+            cartWrapper.innerHTML = '<div id="cart-empty">Ваша корзина пока пуста</div>';
+        }
+    };
+
+
+
+
+
+
+
 
 
     const closeCart = (e) => {
@@ -165,6 +214,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const showWishlist = () => {
         getGoods(renderCard, goods => goods.filter(item => wishlist.includes(item.id)))
     }
+
+
 
     cartBtn.addEventListener('click', openCart);
     cart.addEventListener('click', closeCart);

@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartWrapper = document.querySelector('.cart-wrapper');
 
     const wishlist = [];
+    const goodsBasket = {};
 
     const loading = () => {
         goodsWrapper.innerHTML =
@@ -57,17 +58,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-
-
-
-
-
-
-
-
-
     //render товаров в корзине
-    const createCartGoods = (id, title, price, img) => {
+    const createCardGoodsBasket = (id, title, price, img) => {
         const card = document.createElement('div');
         //console.log(card);
         card.className = 'goods';
@@ -90,24 +82,16 @@ document.addEventListener('DOMContentLoaded', () => {
         //console.log(card);
         return card;
     };
-    const renderCart = (goods) => {
-        cartWrapper.innerHTML = '';
+    const renderBasket = (goods) => {
+        cartWrapper.textContent = '';
         if (goods.length) {
             goods.forEach(({price, id, title, imgMin}) => {
-                cartWrapper.append(createCartGoods(id, title, price, imgMin));
+                cartWrapper.append(createCardGoodsBasket(id, title, price, imgMin));
             });
         } else {
             cartWrapper.innerHTML = '<div id="cart-empty">Ваша корзина пока пуста</div>';
         }
     };
-
-
-
-
-
-
-
-
 
     const closeCart = (e) => {
         const target = e.target; // где был клик?
@@ -172,9 +156,10 @@ document.addEventListener('DOMContentLoaded', () => {
     //wish list
     const checkCount = () => {
         wishlistCounter.textContent = wishlist.length.toString();
+        cardCounter.textContent = Object.keys(goodsBasket).length;
         console.log(typeof wishlistCounter.textContent);
         console.log(typeof wishlist.length);
-
+        console.log('Object.keys(goodsBasket)', Object.keys(goodsBasket));
     };
 
     const storageQuery = (get) => {
@@ -202,6 +187,17 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(wishlist);
     }
 
+    //Добавление товаров в wishList и в Корзину
+    const addBasket = (id) => {
+        if(goodsBasket[id]){
+            goodsBasket[id] += 1;
+        }else{
+            goodsBasket[id] = 1;
+        }
+
+        console.log('goodsBasket', goodsBasket);
+
+    }
     const handlerGoods = e => {
         const target = e.target;
 
@@ -209,13 +205,16 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleWishList(target.dataset.goodsId, target);
 
         }
+
+        if (target.classList.contains('card-add-cart')) {
+            addBasket(target.dataset.goodsId);
+
+        }
     }
 
     const showWishlist = () => {
         getGoods(renderCard, goods => goods.filter(item => wishlist.includes(item.id)))
     }
-
-
 
     cartBtn.addEventListener('click', openCart);
     cart.addEventListener('click', closeCart);

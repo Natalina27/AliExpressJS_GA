@@ -153,6 +153,22 @@ document.addEventListener('DOMContentLoaded', () => {
         input.value = '';
     }
 
+
+    const getCookie = (name) => {
+        let matches = document.cookie.match(new RegExp(
+            "(?:^|; )" + name.replace(/([.$?*|{}()\[\]\\\/+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
+
+    const cookieQuery = (get) =>{
+        if (get){
+            console.log(getCookie('goodsBasket' ));
+
+        }else{
+            document.cookie = `goodsBasket=${JSON.stringify(goodsBasket)};max-age=86400e3`
+        }
+    }
     //wish list
     const checkCount = () => {
         wishlistCounter.textContent = wishlist.length.toString();
@@ -194,6 +210,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }else{
             goodsBasket[id] = 1;
         }
+
+        checkCount();
+        cookieQuery();
 
         console.log('goodsBasket', goodsBasket);
 

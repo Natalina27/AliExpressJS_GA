@@ -104,10 +104,12 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(e.key);
     };
 
+    const showCardBasket = goods => goods.filter(item => goodsBasket.hasOwnProperty(item.id));
     const openCart = (e) => {
         e.preventDefault(); //запрет на переход по ссылке (запрет действий браузера по умолчанию)
         cart.style.display = 'flex';
         document.addEventListener('keyup', closeCart);
+        getGoods(renderBasket, showCardBasket);
     };
 
     const getGoods = (handler, filter) => {

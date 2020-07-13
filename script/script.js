@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cartWrapper = document.querySelector('.cart-wrapper');
 
     const wishlist = [];
-    const goodsBasket = {};
+    let goodsBasket = {};
 
     const loading = () => {
         goodsWrapper.innerHTML =
@@ -163,11 +163,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const cookieQuery = (get) =>{
         if (get){
-            console.log(getCookie('goodsBasket' ));
+            goodsBasket = JSON.parse(getCookie('goodsBasket' ));
 
         }else{
             document.cookie = `goodsBasket=${JSON.stringify(goodsBasket)};max-age=86400e3`
         }
+
+        console.log('goodsBasket', goodsBasket);
+
     }
     //wish list
     const checkCount = () => {
@@ -245,5 +248,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     getGoods(renderCard, randomSort);
     storageQuery(true);
+    cookieQuery(true);
 });
 

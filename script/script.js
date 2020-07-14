@@ -113,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const getGoods = (handler, filter) => {
-        loading();
+        //loading();
         fetch('./db/db.json')
             .then(response => response.json())
             .then(filter)

@@ -166,12 +166,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const cookieQuery = (get) =>{
         if (get){
             goodsBasket = JSON.parse(getCookie('goodsBasket' ));
-
+            checkCount();
         }else{
             document.cookie = `goodsBasket=${JSON.stringify(goodsBasket)};max-age=86400e3`
         }
 
-        console.log('goodsBasket', goodsBasket);
 
     }
     //wish list
@@ -205,7 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         checkCount();
         storageQuery();
-        console.log(wishlist);
     }
 
     //Добавление товаров в wishList и в Корзину

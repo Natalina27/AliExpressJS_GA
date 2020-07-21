@@ -182,11 +182,14 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Object.keys(goodsBasket)', Object.keys(goodsBasket));
     };
 
+    //проверка в cookieQuery как в storageQuery
     const storageQuery = (get) => {
         if (get) {
             if (localStorage.getItem('wishlist')) {
-                JSON.parse(localStorage.getItem('wishlist')).forEach(id => wishlist.push(id));
+                const wishlistStorage = JSON.parse(localStorage.getItem('wishlist'));
+                wishlistStorage.forEach(id => wishlist.push(id));
             }
+            checkCount();
         } else {
             localStorage.setItem('wishlist', JSON.stringify(wishlist));
         }
